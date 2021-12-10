@@ -1,0 +1,35 @@
+{
+    "assembler":
+    [
+        {
+            "iname": "605",
+            "type": "numeric",
+            "default": "0"
+        },
+        {
+            "iname": "606",
+            "type": "string",
+            "default": "vivo-phone",
+            "oov_bucket_size": 8
+        },
+        {
+            "iname": "607",
+            "type": "numeric",
+            "default": "0"
+        },
+        {
+            "iname": "608",
+            "type": "numeric",
+            "default": "0"
+        },
+        {
+            "iname": "609",
+            "type": "numeric",
+            "ops": ["bucketized"],
+            "op_params": {
+                "boundaries": [0, 100, 300, 500]
+            },
+            "default": "0"
+        }
+    ]
+}

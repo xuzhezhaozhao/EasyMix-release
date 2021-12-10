@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package aimaker.predictor.linucb;
+
+// linucbModel模型存储内容约定
+
+message LinucbModel {
+    TrainStage train_stage = 1;   // 冷启动/热运行阶段
+    ModelInfo model_info = 2;     // 模型参数信息
+    ConfigInfo config_info = 3;   // 超参信息
+}
+
+enum TrainStage {
+    COLD_START = 0;
+    HOT_RUN = 1;
+    UNKNOWN = 99;
+}
+
+message ModelInfo {
+    int32 feature_dimension = 1;             // 参数维度
+    repeated float arm = 2;                  // 臂对应的参数
+    repeated Matrix matrix_a = 3;            // 参数矩阵A
+    repeated Matrix inverse_matrix_a = 4;    // 参数矩阵A的逆矩阵
+    repeated Vector vector_b = 5;             // 参数向量b
+}
+
+message Matrix {
+    int32 num_row = 1;
+    int32 num_col = 2;
+    repeated float elements = 3;
+}
+
+message Vector {
+    repeated float elements = 3;
+}
+
+message ConfigInfo {
+    // 置信度权重
+    float alpha = 1;
+
+    // 指定作用分数类型
+    // APP_ECPM = 1
+    // APP_PCTR = 2
+    // APP_PCVR = 3
+    // APP_SIMILARITY = 4
+    // ARTICLE_SCORE = 5
+    // VIDEO_SCORE = 6
+    // GAME_ECPM = 101
+    // GAME_PCTR = 102
+    // GAME_PCVR = 103
+    // GAME_SIMILARITY = 104
+    // GAME_LTV = 105
+    // GAME_PAYWILL = 106
+    int32 score_type = 2;
+
+    // 随机探索概率, 随机选择一个arm
+    float explore_prob = 3;
+}

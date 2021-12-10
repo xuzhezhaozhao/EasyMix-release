@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package aimaker.predictor.qlearning;
+
+// QLearning 动作类型
+enum ActionType {
+    ACTION_UNKNOWN = 0;
+
+    // 模板类型，以多进制的形式编码
+    ACTION_TEMPLATE = 1;
+
+    // 数值类型，一个 action 对应一个浮点数
+    ACTION_NUMERIC = 2;
+}
+
+message ActionInfo {
+    ActionType action_type = 1;
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // 模板action参数
+    // 模板位置数量，如果有 K 个位置，则 action 的数量为 item_type_cnt^K 个
+    int32 template_pos_cnt = 2;
+
+    // 混排场景物品种类数，例如商店首页场景为2种
+    int32 item_type_cnt = 3;
+
+    // 物品种类类型，例如 app, game, video, article，参考aimaker_predictor.proto
+    // 中的 MixItemType 类型
+    // 数组大小为 item_type_cnt
+    // action 编码为item_type_cnt进制的形式
+    repeated int32 item_types = 4;
+    ////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////////
+    // 数值action参数
+    // ACTION_NUMERIC类型 action 对应的 numeric 数值，action 值对应 values 数组
+    // 索引
+    repeated float values = 5;
+
+    // 类似linucb，action对应的浮点数作用的分数类型
+    int32 score_type = 6;
+    ////////////////////////////////////////////////////////////////////////////
+} 
+
+// Q table 记录
+message TableRecord {
+    string key = 1;
+    int32 action = 2;
+    float reward = 3;
+}
+
+message QlearningModel {
+    // 随机探索概率
+    float explore_prob = 1;
+
+    ActionInfo action_info = 2;
+
+    // Q table 数据
+    repeated TableRecord table = 3;
+}

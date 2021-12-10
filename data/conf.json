@@ -1,0 +1,51 @@
+{
+    "assembler":
+    [
+        {
+            "iname": "1450",
+            "type": "numeric",
+            "default": "0"
+        },
+        {
+            "iname": "1451",
+            "type": "numeric",
+            "default": "0"
+        },
+        {
+            "iname": "1452",
+            "type": "numeric",
+            "ops": ["bucketized"],
+            "op_params": {
+                "boundaries": [0, 100, 1000, 3000, 9000]
+            },
+            "default": "0"
+        },
+        {
+            "iname": "1453",
+            "type": "numeric",
+            "ops": ["bucketized"],
+            "op_params": {
+                "boundaries": [0, 100, 200, 300, 400]
+            },
+            "default": "0"
+        },
+        {
+            "iname": "1455",
+            "type": "numeric",
+            "ops": ["bucketized"],
+            "op_params": {
+                "boundaries": [0, 100, 200, 300, 400, 500]
+            },
+            "default": "0"
+        },
+        {
+            "iname": "1456",
+            "type": "numeric",
+            "ops": ["bucketized"],
+            "op_params": {
+                "boundaries": [0, 100, 200, 300, 400, 500]
+            },
+            "default": "0"
+        }
+    ]
+} 
